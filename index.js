@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express')
 const session = require('express-session')
 const MongoStore = require('connect-mongodb-session')(session)
@@ -18,7 +20,7 @@ const authRoutes = require('./routes/auth')
 
 const varMiddleware = require('./middleware/variables')
 
-const MONGO_DB_URL = 'mongodb+srv://maksym:BMQ4T5w!4@cluster0.s6x4n.mongodb.net/shop'
+const MONGO_DB_URL = `mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASS}cluster0.s6x4n.mongodb.net/shop`
 
 const app = express()
 
