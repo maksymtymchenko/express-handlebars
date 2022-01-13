@@ -19,6 +19,7 @@ const authRoutes = require('./routes/auth')
 
 
 const varMiddleware = require('./middleware/variables')
+const userMiddleware = require('./middleware/user')
 
 const MONGO_DB_URL = `mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASS}cluster0.s6x4n.mongodb.net/shop`
 
@@ -49,6 +50,7 @@ app.use(session({
     store
 }))
 app.use(varMiddleware)
+app.use(userMiddleware)
 
 app.use('/', homeRoutes)
 app.use('/add', addRoutes)
