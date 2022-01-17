@@ -7,6 +7,8 @@ const exphbs = require('express-handlebars')
 const Handlebars = require('handlebars')
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 const mongoose = require('mongoose')
+const csrf = require('csurf')
+const flash = require('connect-flash')
 
 const path = require('path')
 
@@ -21,7 +23,7 @@ const authRoutes = require('./routes/auth')
 const varMiddleware = require('./middleware/variables')
 const userMiddleware = require('./middleware/user')
 
-const MONGO_DB_URL = `mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASS}cluster0.s6x4n.mongodb.net/shop`
+const MONGO_DB_URL = `mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASS}@cluster0.s6x4n.mongodb.net/shop`
 
 const app = express()
 
@@ -49,6 +51,8 @@ app.use(session({
     saveUninitialized: false,
     store
 }))
+app.use(csrf())
+app.use(flash())
 app.use(varMiddleware)
 app.use(userMiddleware)
 

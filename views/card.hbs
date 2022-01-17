@@ -16,7 +16,7 @@
                     <td>{{title}}</td>
                     <td>{{count}}</td>
                     <td>
-                        <button class="btn btn-small red js-remove" data-id="{{id}}">Delete course</button>
+                        <button class="btn btn-small red js-remove" data-id="{{id}}" data-csrf="{{@root.csrf}}">Delete course</button>
                     </td>
                 </tr>
             {{/each}}
@@ -24,6 +24,7 @@
         </table>
         <p><strong>Price:</strong><span class="price basket-price">{{price}}</span></p>
         <form action="/orders" method="POST">
+            <input type="hidden" name="_csrf" value="{{csrf}}">
             <button type="submit" class="btn">Make order</button>
         </form>
     {{else}}
